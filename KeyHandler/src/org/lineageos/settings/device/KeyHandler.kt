@@ -131,6 +131,10 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
         }
     }
 
+    override fun onPocketStateChanged(inPocket: Boolean) {
+        // do nothing
+    }
+
     private fun setZenMode(zenMode: Int) {
         // Set zen mode
         notificationManager.setZenMode(zenMode, null, TAG)
