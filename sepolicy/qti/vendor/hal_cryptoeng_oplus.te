@@ -65,7 +65,16 @@ allow hal_cryptoeng_oplus property_socket:sock_file write;
 # Binder interactions
 allow hal_cryptoeng_oplus servicemanager:binder call;
 allow hal_cryptoeng_oplus system_server:binder call;
-allow hal_cryptoeng_oplus hal_drm_widevine:binder call;
+allow hal_cryptoeng_oplus hal_drm_widevine:binder { call transfer };
+allow hal_drm_widevine hal_cryptoeng_oplus:binder { call transfer };
+allow hal_drm_widevine hal_cryptoeng_service:service_manager find;
+allow hal_drm_widevine hal_cryptoeng_hwservice:hwservice_manager find;
+allow hal_cryptoeng_oplus hal_drm_default:binder { call transfer };
+allow hal_drm_default hal_cryptoeng_oplus:binder { call transfer };
+allow hal_drm_default hal_cryptoeng_service:service_manager find;
+allow hal_drm_default hal_cryptoeng_hwservice:hwservice_manager find;
+hal_client_domain(hal_drm_widevine, hal_cryptoeng)
+hal_client_domain(hal_drm_default, hal_cryptoeng)
 allow hal_cryptoeng_oplus vendor_wfdhdcphalservice_qti:binder call;
 allow hal_cryptoeng_oplus vendor_hal_soter_qti:binder call;
 allow hal_cryptoeng_oplus vendor_hal_soter_hwservice:hwservice_manager find;
